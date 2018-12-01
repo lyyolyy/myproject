@@ -23,9 +23,10 @@ div{
 	display:table;line-height:0;
 }
 .container:after{
-	content:''
+	content:'';
 	display:block;
-	clear:both;line-height:0;
+	clear:both;
+	line-height:0;
 }
 body{
 	font-family:arial,"Hiragino Sans GB","Microsoft Yahei",sans-serif;background:#f5f7fa;
@@ -124,8 +125,33 @@ top:20px;padding-top: 15px;
 position:absolute;right:15px;width:132px;height:13px;
 top:20px;
 }
-.top>.menu>a{text-decoration:none;font-size:12px;text-align:center;color:#434a54;line-height:40px;}
-.top>.menu>a:hover{color:#FF8400}
+.top>.menu>a{
+	text-decoration:none;
+	font-size:12px;
+	text-align:center;
+	color:#434a54;
+	line-height:40px;
+}
+.top>.menu>a:hover{
+	color:#FF8400
+}
+.top>#loged{
+	position:absolute;
+	right:15px;
+	top:20px;
+	width:273px;
+	height:13px;
+}
+.top>#loged>a,.top>#loged>span{
+	text-decoration:none;
+	font-size:12px;
+	text-align:center;
+	color:#434a54;
+	line-height:40px;
+}
+.top>#loged>a:hover{
+	color:#FF8400
+}
 .nav{
 	position: relative;
     height: 45px;

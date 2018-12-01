@@ -6,17 +6,16 @@ const pool=require('../pool.js');
 var router=express.Router();
 
 //往路由器中添加路由
-//1注册start
+ //1注册start
 router.post('/reg',(req,res)=>{
   var obj=req.body;
 //如果为空，则注册失败，return阻止程序往后进行
-  var $uname=obj.uname,$upwd=obj.upwd,$phone=obj.phone,$email=obj.email;
+  var $uname=obj.uname,$upwd=obj.upwd,$email=obj.email;
   if (!$uname){res.send({code:401,msg:'uname required'});return};
   if (!$upwd){res.send({code:402,msg:'upwd required'});return};
-  if (!$phone){res.send({code:403,msg:'phone required'});return};
   if (!$email){res.send({code:404,msg:'email required'});return};
 //把用户信息插入数据库
-  pool.query('INSERT INTO xz_user VALUES(NULL,?,?,?,?,NULL,NULL,0)',[$uname,$upwd,$email,$phone],(err,result)=>{if(err)throw err;
+  pool.query('INSERT INTO xz_user VALUES(NULL,?,?,?,NULL,NULL,NULL,0)',[$uname,$upwd,$email],(err,result)=>{if(err)throw err;
 //判断affectedRows是否大于0（是否插入成功）
     if (result.affectedRows>0){res.send({code:200,msg:'reg succeed'})};
   });
@@ -30,7 +29,7 @@ router.post('/login',(req,res)=>{
   if (!$upwd){res.send({code:402,msg:'upwd required'});return};
 //判断用户是否已注册
   pool.query('SELECT * FROM xz_user WHERE uname=? AND upwd=?',[$uname,$upwd],(err,result)=>{if(err)throw err;
-    if (result.length>0){res.send({code:200,msg:'login succeed'})}else{res.send({code:301,msg:'wrong uname or upwd'})}
+    if (result.length>0){req.session.uid=result[0].uid;console.log(req.session.id);res.send({code:200,msg:'login succeed'})}else{res.send({code:301,msg:'wrong uname or upwd'})}
   });
 });
 //2登录end
@@ -88,5 +87,38 @@ router.get('/list',(req,res)=>{
 	});
 });
 //6分页查询end
+//7验证账号重复
+router.get('/cuname',(req,res)=>{
+   var obj=req.query;
+//如果为空，则注册失败，return阻止程序往后进行
+  var $uname=obj.uname;
+  if (!$uname){res.send({code:401,msg:'uname required'});return};
+//把用户信息插入数据库
+  pool.query('SELECT * FROM xz_user WHERE uname=?',[$uname],(err,result)=>{if(err)throw err;
+//判断affectedRows是否大于0（是否插入成功）
+    if (result.length>0){res.send({code:300,msg:'账号已存在'})}else{res.send({code:200,msg:'账号可以注册'})};
+	}); 
+});
+//7end
+//8头部验证是否登录
+router.get("/islogin",(req,res)=>{
+  if(req.session.uid===undefined)
+    {res.send({ok:0});}
+  else
+		{
+		var uid=req.session.uid;
+		pool.query('SELECT uname FROM xz_user WHERE uid = ?',[uid],(err,result)=>{
+			if(err)throw err ;
+			if(result.length>0){res.send({ok:1,uname:result[0].uname})}else{res.send({ok:0})}
+		})
+	}
+})
+//8end
+//9注销
+router.get("/signout",(req,res)=>{
+  req.session.uid=undefined;
+  res.send({code:1});
+})
+//9end
 //导出路由器
 module.exports=router;

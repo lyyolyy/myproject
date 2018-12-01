@@ -2,6 +2,8 @@
 const express=require('express');
 const userRouter=require('./routes/user.js');
 const bodyParser=require('body-parser');
+const cors=require("cors");
+const session=require("express-session");
 //创建服务器
 var app=express();
 app.listen(3000);
@@ -9,6 +11,14 @@ app.listen(3000);
 app.use(bodyParser.urlencoded({extended:false}));
 //托管静态文件到public目录下
 app.use(express.static('public'));
+app.use(cors({
+    origin:["http://127.0.0.1:5500","http://localhost:5500"]
+  }))
+  app.use(session({
+    secret:"128位随机字符",
+    resave:false,
+    saveUninitialized:true
+  }))
 //把用户路由器引用并挂载到/user下
 app.use('/user',userRouter);
 

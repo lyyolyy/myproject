@@ -121,3 +121,7 @@ img {
 .regnow>a{
     text-decoration: none;text-align: center
 }
+.check{
+    font-size: 10px;
+    color:red;
+}

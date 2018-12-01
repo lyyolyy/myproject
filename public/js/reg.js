@@ -5,7 +5,16 @@ uname.onblur=function(){
         var content=this.parentNode.previousElementSibling.innerHTML.slice(0,-1)
         this.nextElementSibling.innerHTML=`<img src="img/commom/err.png" alt="">${content}不能为空`;
         iuname=false;
-    }else if(!vali(this,/^\w{1,10}$/)){this.nextElementSibling.innerHTML='<img src="img/commom/err.png" alt="">10个以内的字母、数字或下划线的组合';iuname=false;}else{this.nextElementSibling.innerHTML='<img src="img/commom/ok.png" alt="">';iuname=true;}
+    }else if(!vali(this,/^\w{1,10}$/)){this.nextElementSibling.innerHTML='<img src="img/commom/err.png" alt="">10个以内的字母、数字或下划线的组合';iuname=false;}else{
+        $.ajax({
+            url:'http://127.0.0.1:3000/user/cuname',
+            data:{uname:uname.value},
+            type:'get',
+            success: (res) =>{
+                if(res.code==300){this.nextElementSibling.innerHTML='<img src="img/commom/err.png" alt="">账号已存在';iuname=false;}else{this.nextElementSibling.innerHTML='<img src="img/commom/ok.png" alt="">账号可注册';iuname=true;}
+            }
+        })
+        }
 }
 uname.onfocus=function(){
     this.nextElementSibling.innerHTML=`*10个以内的字母、数字或下划线的组合`
@@ -43,5 +52,11 @@ ureg.onclick=function(){
     upwd.onblur();
     email.onblur();
     cupwd.onblur();
-    if(iuname&&iupwd&&iemail&&icupwd){alert('可以注册')}else{alert('请正确填写信息')}
+    if(iuname&&iupwd&&iemail&&icupwd){
+        $.ajax({
+            url:'/user/reg',
+            type:'post',
+            data:{uname:uname.value,upwd:upwd.value,email:email.value},
+            success:(res)=>{if(res.code==200){alert('注册成功');location='/login.html'}else{alert('注册失败')}}
+        })}else{alert('请正确填写信息')}
 }
