@@ -1,0 +1,64 @@
+.detail_container{
+    width: 1190px;
+    height: auto;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 20px;
+    color: #656d78;
+}
+.detail_container .ur_here{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.detail_container .ur_here a{
+    font-size: 14px;
+    line-height: 20px;
+    color: #656d78;
+}
+.detail_container .ur_here a:hover{
+    color:#FF8400;
+}
+.good-pic-info{
+    width:100%;
+    display: flex;
+}
+.good-pic-info .good-pic{
+    width:50%;
+    
+}
+.good-pic-info .good-pic img{
+    width:510px;
+}
+.good-pic-info .good-info{
+    width:50%;
+    background: #FF8400;
+    height:300px;
+}
+.leftArrow{
+    margin-left: 10px;
+    display: inline-block;
+    background-image:url('../img/commom/arrow-left.png');
+    background-repeat: no-repeat;
+    height:80px;
+    width:30px;
+    opacity: 0.5;
+    border-radius: 5px;
+    cursor: pointer;
+    background-position: 50% 50%;
+}
+.rightArrow{
+    
+    display: inline-block;
+    background-image:url('../img/commom/arrow-right.png');
+    background-repeat: no-repeat;
+    height:80px;
+    width:30px;
+    opacity: 0.5;
+    border-radius: 5px;
+    cursor: pointer;
+    background-position: 50% 50%;
+}
+.leftArrow:hover,.rightArrow:hover{
+    opacity: 0.5;
+    background-color: #656d78
+}
