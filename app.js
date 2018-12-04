@@ -18,7 +18,10 @@ app.use(cors({
   app.use(session({
     secret:"128位随机字符",
     resave:false,
-    saveUninitialized:true
+    saveUninitialized:true,
+	cookie:{
+       maxAge:1000*60*60*24,
+    }
   }))
 //把用户路由器引用并挂载到/user下
 app.use('/user',userRouter);
