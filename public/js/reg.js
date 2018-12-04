@@ -6,6 +6,7 @@ uname.onblur=function(){
         this.nextElementSibling.innerHTML=`<img src="img/commom/err.png" alt="">${content}不能为空`;
         iuname=false;
     }else if(!vali(this,/^\w{1,10}$/)){this.nextElementSibling.innerHTML='<img src="img/commom/err.png" alt="">10个以内的字母、数字或下划线的组合';iuname=false;}else{
+        this.nextElementSibling.innerHTML='<img src="img/commom/ok.png" alt="">账号可注册';
         $.ajax({
             url:'http://127.0.0.1:3000/user/cuname',
             data:{uname:uname.value},
