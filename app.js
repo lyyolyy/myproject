@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 //托管静态文件到public目录下
 app.use(express.static('public'));
 app.use(cors({
-    origin:["http://127.0.0.1:5500","http://localhost:5500"]
+    origin:["http://127.0.0.1:5500","http://localhost:5500"],
+	credentials:true //要求客户端必须携带cookie
   }))
   app.use(session({
     secret:"128位随机字符",
