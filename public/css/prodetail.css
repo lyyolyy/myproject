@@ -26,7 +26,7 @@
     width:50%;
     background: white
 }
-.good-pic-info .good-pic img{
+.good-pic-info .good-pic big-pic img{
     width:510px;
 }
 .good-pic-info .good-info{
@@ -62,3 +62,12 @@
     opacity: 0.5;
     background-color: #656d78
 }
+.small-pic ul{
+list-style: none;
+display: flex;
+}
+
+.small-pic ul li img{
+    margin-left: 10px;
+    width:60px;
+    }
