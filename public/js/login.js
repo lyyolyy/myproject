@@ -9,11 +9,11 @@ var loginbtn=document.getElementById('loginbtn');
 loginbtn.onclick=function(){
     if(uname.value!=''&&upwd.value!=''){
         $.ajax({
-            url:'/user/login',
+            url:'http://127.0.0.1:3000/user/login',
             data:{uname:uname.value,upwd:upwd.value},
             type:'post',
             success: function(res) {
-                if(res.code==200){alert('登陆成功');location='/index.html'}else{alert('账号或密码错误');upwd.nextElementSibling.innerHTML=`账号或密码错误`}
+                if(res.code==200){alert('登陆成功');location='./index.html'}else{alert('账号或密码错误');upwd.nextElementSibling.innerHTML=`账号或密码错误`}
             }
         })
     }

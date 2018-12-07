@@ -70,4 +70,8 @@ display: flex;
 .small-pic ul li img{
     margin-left: 10px;
     width:60px;
+    
     }
+.small-pic ul li img:hover{
+    box-shadow:0 0 5px 1px #FF8400
+}

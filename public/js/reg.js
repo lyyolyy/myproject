@@ -55,7 +55,7 @@ ureg.onclick=function(){
     cupwd.onblur();
     if(iuname&&iupwd&&iemail&&icupwd){
         $.ajax({
-            url:'/user/reg',
+            url:'http://127.0.0.1:3000/user/reg',
             type:'post',
             data:{uname:uname.value,upwd:upwd.value,email:email.value},
             success:(res)=>{if(res.code==200){alert('注册成功');location='/login.html'}else{alert('注册失败')}}

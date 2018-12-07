@@ -103,7 +103,7 @@ router.get('/cuname',(req,res)=>{
 //8头部验证是否登录
 router.get("/islogin",(req,res)=>{
   if(req.session.uid===undefined)
-    {res.send({ok:0});}
+    {res.send({ok:0,uid:toString(req.session.uid)});}
   else
 		{
 		var uid=req.session.uid;
