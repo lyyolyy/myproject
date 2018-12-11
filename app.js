@@ -1,6 +1,7 @@
 //导入路由器以及中间件
 const express=require('express');
 const userRouter=require('./routes/user.js');
+const proRouter=require('./routes/product.js');
 const bodyParser=require('body-parser');
 const cors=require("cors");
 const session=require("express-session");
@@ -25,5 +26,5 @@ app.use(cors({
   }))
 //把用户路由器引用并挂载到/user下
 app.use('/user',userRouter);
-
+app.use('/product',proRouter);
 
