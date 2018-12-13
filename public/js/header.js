@@ -3,8 +3,8 @@ $(function(){
         url:'http://127.0.0.1:3000/user/islogin',
         type:'get',
         success: function(res) {
-            console.log(res);
-            if(res.ok==1){$('#unlog').css('display','none');$('#loged').css('display','block');$('#loged>span').html(`您好，${res.uname}, 欢迎您回来！`)}
+            console.log(res.uid);
+            if(res.ok==1){$('#unlog').css('display','none');$('#loged').css('display','block');$('#loged>span').html(`您好，${res.uname}, 欢迎您回来！`);sessionStorage.setItem('uid',res.uid);sessionStorage.setItem('uname',res.uname)}
         }
     })
 })
@@ -13,6 +13,8 @@ $('#logout').on('click',function(){
         url:'http://127.0.0.1:3000/user/signout',
         type:'get',
         success: function(res) {
+            sessionStorage.removeItem('uname');
+            sessionStorage.removeItem('uid');
             window.reload();
         }
     })

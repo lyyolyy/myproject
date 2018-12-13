@@ -17,7 +17,28 @@ router.get('/detail',(req,res)=>{
         }
     })
 })
-
+//添加购物车
+router.get('/addcart',(req,res)=>{
+    var uid=req.query.uid;
+    var pid=req.query.pid;
+    var count=req.query.count;
+    pool.query('SELECT * FROM cart WHERE uid=? AND pid=?',[uid,pid],(err,result)=>{
+        if(err)throw err;
+        if(result.length>0){
+            var oldcount=result[0].count;
+            var newcount=parseInt(oldcount)+parseInt(count);
+            pool.query('UPDATE cart SET count=? WHERE uid=? AND pid=?',[newcount,uid,pid],(err,result)=>{
+                if(err)throw err;
+                if(result.affectedRows>0){res.send({code:1})}else{res.send({code:0})}
+            })
+        }else{
+            pool.query('INSERT INTO cart VALUES(NULL,?,?,?,0)',[uid,pid,count],(err,result)=>{
+                if(err)throw err;
+                if(result.affectedRows>0){res.send({code:1})}else{res.send({code:0})}
+            })
+        }
+    })
+})
 
 
 //导出路由器

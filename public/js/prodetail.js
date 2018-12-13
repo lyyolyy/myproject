@@ -60,7 +60,7 @@ $(function(){
                                 </li>
                                 <li>
                                         <a class='good-buy'>立即购买</a>
-                                        <a class='good-addcart'>加入购物车</a>
+                                        <a class='good-addcart' id='addcart'>加入购物车</a>
                                 </li>
                                 <li>
                                         <img src="img/commom/wxappgetqr.png" alt="" class='addwx'>
@@ -78,7 +78,6 @@ $(function(){
                         <li><h3>用户评价</h3>|</li>
                         <li><h3>常见问题</h3></li>
                 </ul>
-                <img src="img/good-detail/QQ.jpg" alt="">
                 <img src="${res.data.detailPic.split(' ')[0]}" alt="">
                 <img src="${res.data.detailPic.split(' ')[1]}" alt="">
                 <img src="${res.data.detailPic.split(' ')[2]}" alt="">
@@ -88,6 +87,7 @@ $(function(){
                 <img src="${res.data.detailPic.split(' ')[6]}" alt="">
                 <img src="${res.data.detailPic.split(' ')[7]}" alt="">
                 <img src="${res.data.detailPic.split(' ')[8]}" alt="">
+                <img src="${res.data.detailPic.split(' ')[9]}" alt="">
         </div>` ;
         var container=document.querySelector('.detail_container');
         container.innerHTML=html;
@@ -121,7 +121,23 @@ $(function(){
         })
         $('.good-pic-info .good-info .good-content .good-count-more').on('click',function(){
             if($('#Gcount').val()<99){$('#Gcount').val(`${Number($('#Gcount').val())+1}`);$('.good-pic-info .good-info .good-content .good-total').html(`￥${parseFloat($('#Gcount').val()*parseFloat($('.good-newprice').html()))}元`)}
+        });
+        $('#addcart').on('click',function(){
+            if(sessionStorage.getItem('uid')){
+                var uid=sessionStorage.getItem('uid');
+                var pid=location.search.slice(5);
+                var count=$('#Gcount').val();
+                $.ajax({
+                    url:'http://127.0.0.1:3000/product/addcart',
+                    type:'get',
+                    data:{uid,pid,count},
+                    success: function(res) {
+                        if(res.code==1){alert('添加成功')}else{alert('添加失败')}
+                    }
+                })
+            }else{alert('请登录');location='login.html'}
         })
+
 
         }
     })

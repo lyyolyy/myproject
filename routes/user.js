@@ -29,7 +29,7 @@ router.post('/login',(req,res)=>{
   if (!$upwd){res.send({code:402,msg:'upwd required'});return};
 //判断用户是否已注册
   pool.query('SELECT * FROM xz_user WHERE uname=? AND upwd=?',[$uname,$upwd],(err,result)=>{if(err)throw err;
-    if (result.length>0){req.session.uid=result[0].uid;console.log(req.session.id);res.send({code:200,msg:'login succeed'})}else{res.send({code:301,msg:'wrong uname or upwd'})}
+    if (result.length>0){req.session.uid=result[0].uid;console.log(req.session.uid);res.send({code:200,msg:'login succeed',uid:result[0].uid})}else{res.send({code:301,msg:'wrong uname or upwd'})}
   });
 });
 //2登录end
@@ -102,6 +102,7 @@ router.get('/cuname',(req,res)=>{
 //7end
 //8头部验证是否登录
 router.get("/islogin",(req,res)=>{
+  console.log(req.session.uid);
   if(req.session.uid===undefined)
     {res.send({ok:0,uid:toString(req.session.uid)});}
   else
@@ -109,7 +110,7 @@ router.get("/islogin",(req,res)=>{
 		var uid=req.session.uid;
 		pool.query('SELECT uname FROM xz_user WHERE uid = ?',[uid],(err,result)=>{
 			if(err)throw err ;
-			if(result.length>0){res.send({ok:1,uname:result[0].uname})}else{res.send({ok:0})}
+			if(result.length>0){res.send({ok:1,uname:result[0].uname,uid:uid})}else{res.send({ok:0})}
 		})
 	}
 })

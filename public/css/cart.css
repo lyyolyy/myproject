@@ -1,0 +1,28 @@
+.cart_container{
+    width: 1190px;
+    height: auto;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 20px;
+    color: #656d78;
+}
+.cart_container .ur_here{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.cart_container .ur_here a{
+    font-size: 14px;
+    line-height: 20px;
+    color: #656d78;
+}
+.cart_container .ur_here a:hover{
+    color:#FF8400;
+}
+.cart_container .cart-detail{
+    width:100%;
+}
+.cart_container .cart-detail h6{
+    height: 31px;
+    color: #666666;
+    font-weight: normal;
+}
