@@ -5,6 +5,7 @@
     font-size: 14px;
     line-height: 20px;
     color: #656d78;
+    padding-left: 10px;
 }
 .cart_container .ur_here{
     margin-top: 10px;
@@ -25,4 +26,10 @@
     height: 31px;
     color: #666666;
     font-weight: normal;
+    line-height: 23px;
+    font-size: 18px;
+}
+.cart_container .cart-detail table tr{
+    background-color:#f6f7fb;
+    text-align: center
 }

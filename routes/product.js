@@ -39,7 +39,15 @@ router.get('/addcart',(req,res)=>{
         }
     })
 })
-
+//购物车页面加载
+router.get('/shoppingcart',(req,res)=>{
+    var uid=req.query.uid;
+    var sql='SELECT b.title,b.price,a.count FROM cart a INNER JOIN product b ON b.pid=a.pid WHERE uid = ?'
+    pool.query(sql,[uid],(err,result)=>{
+        if(err)throw err;
+        if(result.length>0){res.send({code:1,data:result})}else{res.send({code:0})}
+    })
+})
 
 //导出路由器
 module.exports=router;

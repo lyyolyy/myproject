@@ -61,7 +61,7 @@
                 </div>
                 <div id='loged'  style='display:none'>
                     <span></span>
-                    <a href="#">购物车</a>
+                    <a href="/cart.html">购物车</a>
                     |
                     <a href="" id='logout'>退出登录</a>
                 </div>
@@ -88,6 +88,21 @@
             </div>
             <div class='cart-detail'>
                 <h6>我的购物车</h6>
+                <table width="99%" align="center" border="0" cellpadding="5" cellspacing="0" style="border-top:2px solid #ff6f3d">
+                        <thead>
+                                <tr>
+                                  <th>选择</th>
+                                  <th>商品名称</th>
+                                  <th>本店价</th>
+                                  <th>购买数量</th>
+                                  <th>小计</th>
+                                  <th>操作</th>
+                                </tr>
+                        </thead>
+                        <tbody id='tableBody'>
+                                <a href=""></a>/<a href=""></a>
+                        </tbody>
+                </table>
             </div>
     </div>
             <!-- 脚部 -->
@@ -241,6 +256,7 @@
             </div>
     </div>
     <script src="js/jquery-3.2.1.js"></script>
-	<script src='js/header.js'></script>
+        <script src='js/header.js'></script>
+        <script src='js/cart.js'></script>
 </body>
 </html>
