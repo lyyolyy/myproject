@@ -42,12 +42,38 @@ router.get('/addcart',(req,res)=>{
 //购物车页面加载
 router.get('/shoppingcart',(req,res)=>{
     var uid=req.query.uid;
-    var sql='SELECT b.title,b.price,a.count FROM cart a INNER JOIN product b ON b.pid=a.pid WHERE uid = ?'
+    var sql='SELECT b.title,b.price,a.count,a.pid FROM cart a INNER JOIN product b ON b.pid=a.pid WHERE uid = ?'
     pool.query(sql,[uid],(err,result)=>{
         if(err)throw err;
         if(result.length>0){res.send({code:1,data:result})}else{res.send({code:0})}
     })
 })
-
+//购物车数量修改
+router.get('/updatecart',(req,res)=>{
+    var uid=req.query.uid;
+    var pid=req.query.pid;
+    var count=req.query.count;
+    pool.query('UPDATE cart SET count=? WHERE uid=? AND pid=?',[count,uid,pid],(err,result)=>{
+        if(err)throw err;
+        if(result.affectedRows>0){res.send({code:1})}else{res.send({code:0})}
+    })
+})
+//购物车删除
+router.get('/deletecart',(req,res)=>{
+    var uid=req.query.uid;
+    var pid=req.query.pid;
+    pool.query('DELETE FROM cart  WHERE uid=? AND pid=?',[uid,pid],(err,result)=>{
+        if(err)throw err;
+        if(result.affectedRows>0){res.send({code:1})}else{res.send({code:0})}
+    })
+})
+//购物车清空
+router.get('/clearcart',(req,res)=>{
+    var uid=req.query.uid;
+    pool.query('DELETE FROM cart  WHERE uid=?',[uid],(err,result)=>{
+        if(err)throw err;
+        if(result.affectedRows>0){res.send({code:1})}else{res.send({code:0})}
+    })
+})
 //导出路由器
 module.exports=router;

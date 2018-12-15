@@ -4,7 +4,7 @@ $(function(){
         type:'get',
         success: function(res) {
             console.log(res.uid);
-            if(res.ok==1){$('#unlog').css('display','none');$('#loged').css('display','block');$('#loged>span').html(`您好，${res.uname}, 欢迎您回来！`);sessionStorage.setItem('uid',res.uid);sessionStorage.setItem('uname',res.uname)}
+            if(res.ok==1){$('#unlog').css('display','none');$('#loged').css('display','block');$('#loged>span').html(`您好，${res.uname}, 欢迎您回来！`);sessionStorage.setItem('uid',res.uid);sessionStorage.setItem('uname',res.uname)}else{sessionStorage.removeItem('uname');sessionStorage.removeItem('uid')}
         }
     })
 })
