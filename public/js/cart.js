@@ -93,7 +93,7 @@ $(function load(){
                                 type:'get',
                                 data:{uid,pid},
                                 success: function(res) {
-                                    if(res.code==1){alert('删除成功');load()}
+                                    if(res.code==1){alert('删除成功');location.reload()}
                                 }
                             })
                         }
@@ -121,7 +121,7 @@ $(function load(){
                                 type:'get',
                                 data:{uid:sessionStorage.getItem('uid')},
                                 success: function(res) {
-                                    if(res.code==1){alert('清空成功');load()}else{alert('清空失败');load()}
+                                    if(res.code==1){alert('清空成功');location.reload()}else{alert('清空失败');location.reload()}
                                 }
                             })
                         }

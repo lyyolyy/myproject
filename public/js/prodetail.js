@@ -132,7 +132,7 @@ $(function(){
                     type:'get',
                     data:{uid,pid,count},
                     success: function(res) {
-                        if(res.code==1){alert('添加成功')}else{alert('添加失败')}
+                        if(res.code==1){alert('添加成功');location.reload()}else{alert('添加失败')}
                     }
                 })
             }else{alert('请登录');location='login.html'}
